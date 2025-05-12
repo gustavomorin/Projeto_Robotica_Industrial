@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-top: 30px;
+    font-size: 3rem;
+    color: #222;
+  }
+  
+  .controls {
+    margin: 30px auto;
+    font-size: 1.2rem;
+  }
+  
+  input {
+    font-size: 1.2rem;
+    padding: 8px;
+    width: 100px;
+    margin: 0 10px;
+  }
+  
+  button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    background-color: #00b894;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .camera-container {
+    margin: 20px auto;
+    position: relative;
+    width: 640px;
+    height: 480px;
+    border: 5px solid #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  
+  video {
+    width: 640px;
+    height: 480px;
+    object-fit: cover;
+    background-color: white;
+  }
+  
+  /* Alertas */
+  .alerta {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
+    color: white;
+  }
+  
+  .sucesso {
+    background-color: #2ecc71;
+  }
+  
+  .erro {
+    background-color: #e74c3c;
+  }
+  
+  .oculto {
+    display: none;
+  }
+  

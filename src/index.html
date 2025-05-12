@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robo_Dotado</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Robo_Dotado</h1>
+
+  <div class="controls">
+    <label for="altura">Informe sua altura (cm):</label>
+    <input type="number" id="altura" placeholder="Ex: 170" />
+    <button id="confirmarBtn">Confirmar</button>
+  </div>
+
+  <div class="camera-container">
+    <video id="video" autoplay></video>
+    <canvas id="canvas" style="display: none;"></canvas>
+  </div>
+
+  <button id="fotoBtn" disabled>📸 Tirar Foto</button>
+
+  <!-- Alertas -->
+  <div id="alerta-sucesso" class="alerta sucesso oculto">✔️ Altura confirmada com sucesso!</div>
+  <div id="alerta-erro" class="alerta erro oculto">❌ Por favor, insira uma altura válida.</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
