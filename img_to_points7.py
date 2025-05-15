@@ -35,7 +35,7 @@ def floyd_steinberg_dither(arr_gray, threshold):
 
     return (arr == 0)
 
-def image_to_dither_pointcloud(image_path, output_csv='pontos_dither.csv',
+def image_to_dither_pointcloud(image_path, output_csv='pontos_dither2.csv',
                                threshold=128, max_points=10000):
     """
     Remove o fundo, redimensiona para 626×417, faz dithering e limita total de pontos.
@@ -87,13 +87,13 @@ def image_to_dither_pointcloud(image_path, output_csv='pontos_dither.csv',
     # 7) Gera debug PNGs no tamanho alvo
     os.makedirs('img', exist_ok=True)
     debug_full = np.where(mask, 0, 255).astype(np.uint8)
-    Image.fromarray(debug_full, mode='L').save('img/pontos_dither_debug.png')
+    Image.fromarray(debug_full, mode='L').save('img/pontos_dither_debug2.png')
     subsample_mask = np.zeros_like(mask)
     subsample_mask[ys, xs] = True
     debug_sub = np.where(subsample_mask, 0, 255).astype(np.uint8)
-    Image.fromarray(debug_sub, mode='L').save('img/pontos_dither_debug_subsample.png')
-    print("[🔍] Debug completo: img/pontos_dither_debug.png")
-    print("[🔍] Debug reduzido: img/pontos_dither_debug_subsample.png")
+    Image.fromarray(debug_sub, mode='L').save('img/pontos_dither_debug_subsample2.png')
+    print("[🔍] Debug completo: img/pontos_dither_debug2.png")
+    print("[🔍] Debug reduzido: img/pontos_dither_debug_subsample2.png")
 
     # 8) Salva a visualização final no mesmo tamanho
     final_path = 'img/final_dither.png'
@@ -123,4 +123,4 @@ if __name__=='__main__':
         max_points = args.max_points
     )
 
-# python img_to_points6.py img/quadrado.png --output pontos_dither.csv --threshold 180 --max_points 100000
+# python img_to_points7.py img/pixelart.png --output pontos_dither2.csv --threshold 180 --max_points 100000

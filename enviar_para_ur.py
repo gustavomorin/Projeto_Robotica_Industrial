@@ -112,6 +112,17 @@ for i in range(0, total, CHUNK_SIZE // 2):
     bloco_x = valores_x[i:i + CHUNK_SIZE // 2]
     bloco_y = valores_y[i:i + CHUNK_SIZE // 2]
 
+    # Se for o último bloco e tiver menos de 10 pontos, preenche com o último ponto
+    '''if i + (CHUNK_SIZE // 2) >= total:
+        while len(bloco_x) < 10:
+            bloco_x.append(bloco_x[-1])
+            bloco_y.append(bloco_y[-1])'''
+    # Se for o último bloco e tiver menos de 10 pontos, preenche com 1
+    if i + (CHUNK_SIZE // 2) >= total:
+        while len(bloco_x) < 10:
+            bloco_x.append(1)
+            bloco_y.append(1)
+
     print('Aguardando conexão...')
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -148,7 +159,6 @@ for i in range(0, total, CHUNK_SIZE // 2):
             print(f"[Robô disse - confirmação] (repr): {repr(confirmacao)}")
             if confirmacao.strip() != 'block_done':
                 print("[!] Esperado 'block_done', mas recebido algo diferente.")
-                break
 
             time.sleep(0.1)
 
