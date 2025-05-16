@@ -1,0 +1,13 @@
+# Ignorar ambiente virtual
+venv/
+
+# Ignorar arquivos temporários
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar arquivos de Jupyter
+.ipynb_checkpoints/
+
+# Ignorar arquivos do VS Code
+.vscode/
