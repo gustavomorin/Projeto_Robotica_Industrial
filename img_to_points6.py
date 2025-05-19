@@ -8,14 +8,16 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from rembg import remove
 
-TARGET_RESOLUTION = (326, 277)  # largura × altura 626, 417
+TARGET_RESOLUTION = (326, 277)  # largura × altura 626, 417 326, 277
 
 def floyd_steinberg_dither(arr_gray, threshold):
     """
     Aplica Floyd–Steinberg com threshold customizável.
     Retorna máscara booleana onde True = pixel preto (a desenhar).
     """
-    arr = arr_gray.astype(float)
+    #arr = arr_gray.astype(float)
+    # Aumenta brilho das regiões claras para remover ruídos
+    arr = np.clip(arr_gray + 60, 0, 255)
     h, w = arr.shape
     for y in range(h):
         for x in range(w):
@@ -123,4 +125,4 @@ if __name__=='__main__':
         max_points = args.max_points
     )
 
-# python img_to_points6.py img/quadrado.png --output pontos_dither.csv --threshold 180 --max_points 100000
+# python img_to_points6.py img/fotopessoa10.jpeg --output pontos_dither.csv --threshold 180 --max_points 100000
