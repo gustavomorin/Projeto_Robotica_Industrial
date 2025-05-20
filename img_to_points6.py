@@ -8,7 +8,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from rembg import remove
 
-TARGET_RESOLUTION = (326, 277)  # largura × altura 626, 417 326, 277
+TARGET_RESOLUTION = (840, 594)  # largura × altura 626, 417 326, 277
 
 def floyd_steinberg_dither(arr_gray, threshold):
     """
@@ -125,4 +125,4 @@ if __name__=='__main__':
         max_points = args.max_points
     )
 
-# python img_to_points6.py img/fotopessoa10.jpeg --output pontos_dither.csv --threshold 180 --max_points 100000
+# python img_to_points6.py img/fotogrupo.png --output pontos_dither.csv --threshold 180 --max_points 100000
