@@ -1,84 +1,121 @@
+/* ===== reset básico ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== corpo e títulos ===== */
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-  }
-  
-  h1 {
-    margin-top: 30px;
-    font-size: 3rem;
-    color: #222;
-  }
-  
-  .controls {
-    margin: 30px auto;
-    font-size: 1.2rem;
-  }
-  
-  input {
-    font-size: 1.2rem;
-    padding: 8px;
-    width: 100px;
-    margin: 0 10px;
-  }
-  
-  button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    border: none;
-    background-color: #00b894;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .camera-container {
-    margin: 20px auto;
-    position: relative;
-    width: 640px;
-    height: 480px;
-    border: 5px solid #fff;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  }
-  
-  video {
-    width: 640px;
-    height: 480px;
-    object-fit: cover;
-    background-color: white;
-  }
-  
-  /* Alertas */
-  .alerta {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transition: opacity 0.5s ease-in-out;
-    color: white;
-  }
-  
-  .sucesso {
-    background-color: #2ecc71;
-  }
-  
-  .erro {
-    background-color: #e74c3c;
-  }
-  
-  .oculto {
-    display: none;
-  }
-  
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+}
+
+/* ===== passos (steps) ===== */
+.step {
+  margin-top: 30px;
+}
+
+/* ===== centralização de vídeo e previews ===== */
+.camera-container,
+.preview-container,
+#step4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* vídeo ocupa no máximo 80% da largura */
+video {
+  max-width: 80%;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+/* preview de foto e de pontos */
+#previewImg,
+#pointsPreview {
+  display: block;
+  max-width: 80%;
+  margin: 15px auto;
+  border: 2px solid #333;
+  border-radius: 4px;
+}
+
+/* botões de preview */
+.preview-buttons {
+  display: flex;
+  gap: 10px;
+}
+.preview-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.preview-buttons button:hover {
+  background: #0056b3;
+}
+
+/* inputs e botões gerais */
+input[type="number"], button {
+  padding: 10px;
+  font-size: 1rem;
+}
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background: #28a745;
+  color: #fff;
+  margin: 5px;
+}
+button:hover {
+  background: #1e7e34;
+}
+
+/* form de altura */
+#step2 label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* ===== barra de progresso ===== */
+.progress-bar {
+  width: 80%;
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+#progressFill {
+  height: 100%;
+  width: 0;
+  background: #17a2b8;
+  transition: width 0.3s ease;
+}
+
+/* ===== alertas ===== */
+.alerta {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #dc3545;
+  color: #fff;
+  border-radius: 4px;
+  display: inline-block;
+}
+.oculto {
+  display: none !important;
+}

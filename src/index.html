@@ -4,28 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Robo_Dotado</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
   <h1>Robo_Dotado</h1>
 
-  <div class="controls">
+  <!-- STEP 1 -->
+  <div id="step1">
+    <button id="iniciarBtn">Iniciar Robo</button>
+    <div id="alert-robot" class="alerta erro oculto"></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" style="display:none;">
     <label for="altura">Informe sua altura (cm):</label>
     <input type="number" id="altura" placeholder="Ex: 170" />
-    <button id="confirmarBtn">Confirmar</button>
+    <button id="confirmarBtn">Confirmar Altura</button>
+    <div id="alert-altura" class="alerta erro oculto"></div>
   </div>
 
-  <div class="camera-container">
-    <video id="video" autoplay></video>
-    <canvas id="canvas" style="display: none;"></canvas>
+  <!-- STEP 3: camera + upload -->
+  <div id="step3" style="display:none;">
+    <div class="camera-container">
+      <video id="video" autoplay></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+    <div class="preview">
+      <img id="previewImg" style="display:none; width:320px; border:2px solid #333;" />
+      <br/>
+      <!-- escolha de método -->
+      <div class="preview-buttons">
+        <button id="snapBtn">📸 Tirar Foto</button>
+        <input type="file" id="uploadInput" accept="image/*" />
+      </div>
+      <!-- botões de ação -->
+      <div class="preview-buttons">
+        <button id="retakeBtn" style="display:none;">Refazer Foto</button>
+        <button id="confirmPhotoBtn" style="display:none;">Confirmar Foto</button>
+      </div>
+    </div>
+    <div id="alert-photo" class="alerta erro oculto"></div>
   </div>
 
-  <button id="fotoBtn" disabled>📸 Tirar Foto</button>
+  <!-- STEP 4 -->
+  <div id="step4" style="display:none; margin-top:30px; text-align:center;">
+    <h2>Preview de Pontos</h2>
+    <img id="pointsPreview" src="" alt="Preview dos Pontos"
+         style="max-width:80%; border:2px solid #333; border-radius:4px; margin-bottom:20px;" />
+    <div class="progress-bar">
+      <div id="progressFill"></div>
+    </div>
+  </div>
 
-  <!-- Alertas -->
-  <div id="alerta-sucesso" class="alerta sucesso oculto">✔️ Altura confirmada com sucesso!</div>
-  <div id="alerta-erro" class="alerta erro oculto">❌ Por favor, insira uma altura válida.</div>
-
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

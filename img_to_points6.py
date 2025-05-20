@@ -47,9 +47,9 @@ def image_to_dither_pointcloud(image_path, output_csv='pontos_dither.csv',
      - img/pontos_dither_debug_subsample.png (nuvem reduzida)
      - img/final_dither.png (subsample no tamanho 626×417)
     """
-    print(f"[📷] Processando: {image_path}")
-    print(f"[⚙️] Threshold = {threshold}, Max pontos = {max_points}")
-    print(f"[🔧] Redimensionando para {TARGET_RESOLUTION[0]}×{TARGET_RESOLUTION[1]}")
+    print(f"[] Processando: {image_path}")
+    print(f"[] Threshold = {threshold}, Max pontos = {max_points}")
+    print(f"[] Redimensionando para {TARGET_RESOLUTION[0]}×{TARGET_RESOLUTION[1]}")
 
     # 1) Remove fundo
     with open(image_path, 'rb') as f:
@@ -70,13 +70,13 @@ def image_to_dither_pointcloud(image_path, output_csv='pontos_dither.csv',
     mask = floyd_steinberg_dither(arr_gray, threshold)
     ys, xs = np.nonzero(mask)
     total = len(xs)
-    print(f"[✔️] Total original: {total} pontos")
+    print(f"[] Total original: {total} pontos")
 
     # 5) Subamostragem para limitar número de pontos
     if max_points and total > max_points:
         idxs = np.random.choice(total, max_points, replace=False)
         xs = xs[idxs]; ys = ys[idxs]
-        print(f"[⚠️] Subamostrado para {len(xs)} pontos")
+        print(f"[] Subamostrado para {len(xs)} pontos")
 
     # 6) Salva CSV
     with open(output_csv, 'w', newline='') as f:
@@ -84,7 +84,7 @@ def image_to_dither_pointcloud(image_path, output_csv='pontos_dither.csv',
         writer.writerow(['x_pixel','y_pixel'])
         for x, y in zip(xs, ys):
             writer.writerow([int(x), int(y)])
-    print(f"[💾] CSV salvo em: {output_csv}")
+    print(f"[] CSV salvo em: {output_csv}")
 
     # 7) Gera debug PNGs no tamanho alvo
     os.makedirs('img', exist_ok=True)
@@ -94,13 +94,13 @@ def image_to_dither_pointcloud(image_path, output_csv='pontos_dither.csv',
     subsample_mask[ys, xs] = True
     debug_sub = np.where(subsample_mask, 0, 255).astype(np.uint8)
     Image.fromarray(debug_sub, mode='L').save('img/pontos_dither_debug_subsample.png')
-    print("[🔍] Debug completo: img/pontos_dither_debug.png")
-    print("[🔍] Debug reduzido: img/pontos_dither_debug_subsample.png")
+    print("[] Debug completo: img/pontos_dither_debug.png")
+    print("[] Debug reduzido: img/pontos_dither_debug_subsample.png")
 
     # 8) Salva a visualização final no mesmo tamanho
     final_path = 'img/final_dither.png'
     Image.fromarray(debug_sub, mode='L').save(final_path)
-    print(f"[🖼️] Final salvo em: {final_path}")
+    print(f"[] Final salvo em: {final_path}")
 
     # 9) Mostra na tela
     plt.figure(figsize=(width/100, height/100), dpi=100)

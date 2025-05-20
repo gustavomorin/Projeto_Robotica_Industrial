@@ -136,12 +136,12 @@ for i in range(0, total, CHUNK_SIZE // 2):
         print(f"[Robô disse - connected] (repr): {repr(recebida)}")
 
         if recebida.strip() != 'connected':
-            print(f"[!] Esperado 'connected', mas recebido: '{recebida.strip()}'")
+            print(f"[] Esperado 'connected', mas recebido: '{recebida.strip()}'")
             c.close()
             s.close()
             continue
         else:
-            print("[✓] Robô confirmou conexão.")
+            print("[] Robô confirmou conexão.")
 
         solicitacao = c.recv(1024).decode('utf-8')
         print(f"[Robô disse - asking] (repr): {repr(solicitacao)}")
@@ -151,19 +151,19 @@ for i in range(0, total, CHUNK_SIZE // 2):
             mensagem = f"({','.join(lista_formatada)})"
             c.send(mensagem.encode('utf-8'))
 
-            print(f'[→] Enviando bloco {i//(CHUNK_SIZE//2) + 1} com {len(bloco_x)} pares:')
+            print(f'[] Enviando bloco {i//(CHUNK_SIZE//2) + 1} com {len(bloco_x)} pares:')
             print(f'  {mensagem}')
 
             # Aguarda confirmação de que o bloco foi processado
             confirmacao = c.recv(1024).decode('utf-8')
             print(f"[Robô disse - confirmação] (repr): {repr(confirmacao)}")
             if confirmacao.strip() != 'block_done':
-                print("[!] Esperado 'block_done', mas recebido algo diferente.")
+                print("[] Esperado 'block_done', mas recebido algo diferente.")
 
             time.sleep(0.1)
 
         else:
-            print(f"[!] Mensagem inesperada: '{solicitacao.strip()}'")
+            print(f"[] Mensagem inesperada: '{solicitacao.strip()}'")
 
     except socket.error as e:
         print(f'Erro de socket: {e}')
