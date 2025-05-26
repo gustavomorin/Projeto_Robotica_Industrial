@@ -67,6 +67,7 @@ print('Finalizado.')'''
 import socket
 import time
 import pandas as pd
+from img_to_points6 import largura, altura
 
 print('Program Started')
 
@@ -76,8 +77,10 @@ CSV_PATH = 'pontos_dither.csv'
 CHUNK_SIZE = 20  # Total de valores (10 x, 10 y)
 
 # Tamanho da imagem original em pixels
-LARGURA_IMAGEM_PX = 326
-ALTURA_IMAGEM_PX = 277
+#LARGURA_IMAGEM_PX = 326
+#ALTURA_IMAGEM_PX = 277
+LARGURA_IMAGEM_PX = largura
+ALTURA_IMAGEM_PX = altura
 
 # Tamanho da folha A4 em metros
 LARGURA_FOLHA = 0.210

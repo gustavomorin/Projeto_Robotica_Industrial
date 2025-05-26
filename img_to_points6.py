@@ -8,7 +8,9 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from rembg import remove
 
-TARGET_RESOLUTION = (420, 594)  # largura × altura 626, 417 326, 277 840, 594
+largura = 720
+altura = 794
+TARGET_RESOLUTION = (720, 794)  # largura × altura 626, 417 326, 277 840, 594
 
 def floyd_steinberg_dither(arr_gray, threshold):
     """
@@ -115,7 +117,7 @@ if __name__=='__main__':
     parser.add_argument('image',      help='Caminho da imagem')
     parser.add_argument('--output',   default='pontos_dither.csv',  help='CSV de saída')
     parser.add_argument('--threshold',type=int, default=128,         help='Threshold [0–255]')
-    parser.add_argument('--max_points',type=int, default=10000,      help='Máx pontos no CSV')
+    parser.add_argument('--max_points',type=int, default=200000,      help='Máx pontos no CSV')
     args = parser.parse_args()
 
     image_to_dither_pointcloud(
