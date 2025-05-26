@@ -1,5 +1,3 @@
-# app.py
-
 import os
 import sys
 import subprocess
@@ -34,7 +32,7 @@ def start_robot():
 
     cmd = [sys.executable, 'chamar_ur.py', str(altura)]
     try:
-        subprocess.run(cmd, check=True)  # herda stdout/err automaticamente
+        subprocess.run(cmd, check=True)
         return jsonify(status='posicionado')
     except subprocess.CalledProcessError as e:
         return jsonify(status='error', message=str(e)), 500
@@ -51,24 +49,60 @@ def capture_photo():
     return jsonify(status='received')
 
 
-@app.route('/process_photo', methods=['POST'])
-def process_photo():
+@app.route('/test_photo', methods=['POST'])
+def test_photo():
     try:
-        # 1) Gera o CSV de pontos
+        data = request.get_json() or {}
+        formato_folha = data.get('formato', 'A4-p')
+        largura_res = data.get('largura', 720)
+        altura_res = data.get('altura', 794)
+
+        env = os.environ.copy()
+        env['FORMATO_FOLHA'] = formato_folha
+        env['LARGURA_RES'] = str(largura_res)
+        env['ALTURA_RES'] = str(altura_res)
+
+        # Roda apenas o processamento de pontos
         subprocess.run([
             sys.executable, 'img_to_points6.py',
             os.path.join(UPLOAD_FOLDER, 'foto.png'),
             '--output', 'pontos_dither.csv'
-        ], check=True)
+        ], check=True, env=env)
 
-        # 2) Envia os pontos ao robô com streaming de saída
+        return jsonify(status='tested')
+    except subprocess.CalledProcessError as e:
+        return jsonify(status='error', message=str(e)), 500
+
+
+@app.route('/process_photo', methods=['POST'])
+def process_photo():
+    try:
+        data = request.get_json() or {}
+        formato_folha = data.get('formato', 'A4-p')
+        largura_res = data.get('largura', 720)
+        altura_res = data.get('altura', 794)
+
+        env = os.environ.copy()
+        env['FORMATO_FOLHA'] = formato_folha
+        env['LARGURA_RES'] = str(largura_res)
+        env['ALTURA_RES'] = str(altura_res)
+
+        # Gera CSV de pontos
+        subprocess.run([
+            sys.executable, 'img_to_points6.py',
+            os.path.join(UPLOAD_FOLDER, 'foto.png'),
+            '--output', 'pontos_dither.csv'
+        ], check=True, env=env)
+
+        # Envia pontos ao robô
         print("=== Iniciando envio de pontos (enviar_para_ur.py) ===")
         p = subprocess.Popen(
             [sys.executable, 'enviar_para_ur.py'],
             stdout=sys.stdout,
-            stderr=sys.stderr
+            stderr=sys.stderr,
+            env=env
         )
-        p.wait()  # aguarda terminar; tudo que enviar_para_ur.py imprimir aparecerá no seu terminal
+        p.wait()
 
         return jsonify(status='done')
     except subprocess.CalledProcessError as e:
@@ -76,5 +110,4 @@ def process_photo():
 
 
 if __name__ == '__main__':
-    # desliga o reloader pra não reiniciar no meio do envio
     app.run(debug=True, use_reloader=False)

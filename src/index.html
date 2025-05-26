@@ -32,6 +32,27 @@
     <div class="preview">
       <img id="previewImg" style="display:none; width:320px; border:2px solid #333;" />
       <br/>
+
+      <!-- escolha de formato -->
+      <div id="formato-folha" style="margin: 10px 0;">
+        <label for="formato">Formato da folha:</label>
+        <select id="formato">
+          <option value="A4-p">A4 - Retrato</option>
+          <option value="A4-l">A4 - Paisagem</option>
+          <option value="A3-p">A3 - Retrato</option>
+          <option value="A3-l">A3 - Paisagem</option>
+          <option value="A2-p">A2 - Retrato</option>
+        </select>
+      </div>
+
+      <!-- escolha de resolução -->
+      <div id="resolucao" style="margin: 10px 0;">
+        <label for="largura">Largura px:</label>
+        <input type="number" id="largura" value="720" style="width:70px;" />
+        <label for="altura">Altura px:</label>
+        <input type="number" id="altura_res" value="794" style="width:70px;" />
+      </div>
+
       <!-- escolha de método -->
       <div class="preview-buttons">
         <button id="snapBtn">📸 Tirar Foto</button>
@@ -40,6 +61,7 @@
       <!-- botões de ação -->
       <div class="preview-buttons">
         <button id="retakeBtn" style="display:none;">Refazer Foto</button>
+        <button id="testPhotoBtn" style="display:none;">Testar Foto</button>
         <button id="confirmPhotoBtn" style="display:none;">Confirmar Foto</button>
       </div>
     </div>

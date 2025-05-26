@@ -68,6 +68,7 @@ import socket
 import time
 import pandas as pd
 from img_to_points6 import largura, altura
+import os
 
 print('Program Started')
 
@@ -83,8 +84,30 @@ LARGURA_IMAGEM_PX = largura
 ALTURA_IMAGEM_PX = altura
 
 # Tamanho da folha A4 em metros
-LARGURA_FOLHA = 0.210
-ALTURA_FOLHA = 0.297
+#LARGURA_FOLHA = 0.210
+#ALTURA_FOLHA = 0.297
+# Pega o formato da folha do ambiente
+formato_folha = os.environ.get('FORMATO_FOLHA', 'A4-p')
+if formato_folha == 'A4-p':
+    LARGURA_FOLHA = 0.210
+    ALTURA_FOLHA = 0.297
+elif formato_folha == 'A4-l':
+    LARGURA_FOLHA = 0.297
+    ALTURA_FOLHA = 0.210
+elif formato_folha == 'A3-p':
+    LARGURA_FOLHA = 0.297
+    ALTURA_FOLHA = 0.420
+elif formato_folha == 'A3-l':
+    LARGURA_FOLHA = 0.420
+    ALTURA_FOLHA = 0.297
+elif formato_folha == 'A2-p':
+    LARGURA_FOLHA = 0.420
+    ALTURA_FOLHA = 0.594
+else:
+    LARGURA_FOLHA = 0.210
+    ALTURA_FOLHA = 0.297
+
+print(f"[INFO] Formato da folha: {formato_folha} - {LARGURA_FOLHA}m x {ALTURA_FOLHA}m")
 
 # Lê o CSV
 df = pd.read_csv(CSV_PATH)

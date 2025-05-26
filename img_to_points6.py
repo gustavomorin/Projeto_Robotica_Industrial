@@ -8,9 +8,14 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from rembg import remove
 
-largura = 720
-altura = 794
-TARGET_RESOLUTION = (720, 794)  # largura × altura 626, 417 326, 277 840, 594
+#largura = 720
+#altura = 794
+#TARGET_RESOLUTION = (720, 794)  # largura × altura 626, 417 326, 277 840, 594
+
+largura = int(os.environ.get('LARGURA_RES', '720'))
+altura = int(os.environ.get('ALTURA_RES', '794'))
+TARGET_RESOLUTION = (largura, altura)
+
 
 def floyd_steinberg_dither(arr_gray, threshold):
     """
