@@ -12,8 +12,8 @@ from rembg import remove
 #altura = 794
 #TARGET_RESOLUTION = (720, 794)  # largura × altura 626, 417 326, 277 840, 594
 
-largura = int(os.environ.get('LARGURA_RES', '720'))
-altura = int(os.environ.get('ALTURA_RES', '794'))
+largura = int(os.environ.get('LARGURA_RES', '820'))
+altura = int(os.environ.get('ALTURA_RES', '894'))
 TARGET_RESOLUTION = (largura, altura)
 
 
@@ -132,4 +132,4 @@ if __name__=='__main__':
         max_points = args.max_points
     )
 
-# python img_to_points6.py img/fotokatz.jpg --output pontos_dither.csv --threshold 180 --max_points 100000
+# python img_to_points6.py img/fotocaio.jpg --output pontos_dither.csv --threshold 180 --max_points 200000
